@@ -38,7 +38,7 @@ def generate_bingo_card():
     for col_idx, text in enumerate(headers):
         x = start_x + col_idx * cell_size
         draw.rectangle([x, 40, x + cell_size, 90], fill="#4CAF50", outline="black")
-        draw.text((x + 30, 50), text, fill="white")
+        draw.text((x + 32, 55), text, fill="white")
 
     # ሰንጠረዥ እና ቁጥሮችን መሳል
     for col_idx in range(5):
@@ -58,10 +58,11 @@ def generate_bingo_card():
             draw.rectangle([x, y, x + cell_size, y + cell_size], fill=fill_color, outline="black")
             
             # ቁጥር መጻፍ
-            text_x = x + 25 if len(val) < 2 else x + 20
+            text_x = x + 28 if len(val) == 1 else (x + 22 if len(val) == 2 else x + 18)
             if val == "FREE":
-                text_x = x + 15
-            draw.text((text_x, y + 30), val, fill="black")
+                text_x = x + 18
+
+            draw.text((text_x, y + 32), val, fill="black")
 
     # ምስሉን ወደ Memory መጨመር
     bio = BytesIO()
@@ -84,9 +85,11 @@ async def card_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_photo(photo=card_image, caption="🎲 የእርስዎ የቢንጎ ካርቴላ ይኸውልዎት! መልካም ዕድል!")
 
 if __name__ == '__main__':
-    TOKEN = os.getenv("BOT_TOKEN")
-    if not TOKEN:
-        raise ValueError("BOT_TOKEN አልተገኘም!")
+    # 🔴 የእርስዎን የቴሌግራም ቦት ቶከን በቀጥታ ከዚህ በታች ባለው Quotation ውስጥ ያስገቡ
+    TOKEN = "የእርስዎን_ቦት_ቶከን_እዚህ_ውስጥ_ያድርጉ"
+    
+    if not TOKEN or TOKEN == "የእርስዎን_ቦት_ቶከን_እዚህ_ውስጥ_ያድርጉ":
+        raise ValueError("እባክዎ ትክክለኛውን የቦት ቶከን ያስገቡ!")
 
     application = ApplicationBuilder().token(TOKEN).build()
 
