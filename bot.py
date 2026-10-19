@@ -89,8 +89,7 @@ if __name__ == '__main__':
     TOKEN = "የእርስዎን_ቦት_ቶከን_እዚህ_ውስጥ_ያድርጉ"
     
     if not TOKEN or TOKEN == "የእርስዎን_ቦት_ቶከን_እዚህ_ውስጥ_ያድርጉ":
-        raise ValueError("እባክዎ ትክክለኛውን የቦት ቶከን ያስገቡ!")
-
+8875481705:AAGg09K0SL80r9yTS31rZ09KY0TZM_ASA7k
     application = ApplicationBuilder().token(TOKEN).build()
 
     application.add_handler(CommandHandler('start', start))
